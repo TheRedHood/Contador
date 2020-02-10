@@ -133,10 +133,10 @@ class Archivo:
             linea.encode("hex")
         self.f.seek(0)
         return "listo"
-#main
+
 nombre=input("Nombre del archivo:")
 archivo=Archivo(nombre)
-#archivo.muestra()
+
 print("El numero de vocales son:",archivo.cuentaVocales())
 print("El numero de Consonantes son:",archivo.cuentaConsonantes())
 print("El numero de signos de puntuacion son:",archivo.cuentaSignos())
