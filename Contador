@@ -1,0 +1,153 @@
+from sys import exit
+import shutil, os
+class Archivo:
+    def __init__(self,nombre):
+        try:
+            self.f=open(nombre,'r')
+            self.nombre=nombre
+        except:
+            print("no se puedeabrir el archivo",nombre)
+            exit()
+
+    def muestra(self):
+        i=0
+        for linea in self.f:
+            print("{:3}{:}".format(i,linea))
+        self.f.seek(0)
+    def cuentaVocales(self):
+        def vocales(s):
+            contador=0
+            for i in range (len(s)):
+                if s[i] in set("aeiouáéíóú"):
+                    contador+=1
+            return contador
+        contador=0
+        for linea in self.f:
+            contador +=vocales(linea)
+        self.f.seek(0)
+        return contador
+    def cuentaConsonantes(self):
+        def consonantes(st):
+            contador1=0
+            for i in range(len(st)):
+                if st[i] in set("bcdfghjklmnñpqrstvwxz"):
+                    contador1+=1
+            return contador1
+        contador1=0
+        for linea in self.f:
+            contador1+=consonantes(linea)
+        self.f.seek(0)
+        return contador1
+    def cuentaSignos(self):
+        def Signos(s):
+            contador=0
+            for i in range(len(s)):
+                if s[i] in set("'-','.',',','´','!','?','¡','¿'"):
+                    contador+=1
+            return contador
+        contador=0
+        for linea in self.f:
+            contador+=Signos(linea)
+        self.f.seek(0)
+        return contador
+    def cuentaEspacios(self):
+        def Espacios(s):
+            contador=0
+            for i in range(len(s)):
+                if s[i] in set("' '"):
+                    contador+=1
+            return contador
+        contador=0
+        for linea in self.f:
+            contador+=Espacios(linea)
+        self.f.seek(0)
+        return contador
+    def cuentaPalabras(self):
+        def Palabras(s):
+            contador=0
+            for i in range(len(s)):
+                if s[i] in set("' ','\n'"):
+                    contador+=1
+            return contador
+        contador=0
+        for linea in self.f:
+            contador+=Palabras(linea)
+        self.f.seek(0)
+        return contador
+    def cuentaLineas(self):
+        def Lineas(s):
+            contador=0
+            for i in range(len(s)):
+                if s[i] in set ("'\n'"):
+                    contador+=1
+            return contador
+        contador=0
+        for linea in self.f:
+            contador+=Lineas(linea)
+        self.f.seek(0)
+        return contador
+    def cuentaMayusculas(self):
+        def Mayusculas(s):
+            contador=0
+            for i in range(len(s)):
+                if s[i] in set ("ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
+                    contador+=1
+            return contador
+        contador=0
+        for linea in self.f:
+            contador+=Mayusculas(linea)
+        self.f.seek(0)
+        return contador
+    def cuentaMinusculas(self):
+        def minusculas(s):
+            contador=0
+            for i in range(len(s)):
+                if s[i] in set ("abcdefghijklmnopqrstuvwxyz"):
+                    contador+=1
+            return contador
+        contador=0
+        for linea in self.f:
+            contador+=minusculas(linea)
+        self.f.seek(0)
+        return contador
+    def CopiaArchivo(self):
+        try:
+            shutil.copy(nombre, '/Users/Eliuth/Desktop/archivo2.txt')
+            print("Archivo copiado")
+            return ("complete")
+        except:
+            print("Se ha producido un error")
+            return ("fallo")
+    def ConvierteMinusculas(self):
+        for linea in self.f:
+            linea.lower()
+        self.f.seek(0)
+        return ("complete")
+    def ConvierteMayusculas(self):
+        for linea in self.f:
+            linea.upper()
+        self.f.seek(0)
+        return ("COMPLETE")
+    def Hexadecimal(self):
+        for linea in self.f:
+            linea.encode("hex")
+        self.f.seek(0)
+        return "listo"
+#main
+nombre=input("Nombre del archivo:")
+archivo=Archivo(nombre)
+#archivo.muestra()
+print("El numero de vocales son:",archivo.cuentaVocales())
+print("El numero de Consonantes son:",archivo.cuentaConsonantes())
+print("El numero de signos de puntuacion son:",archivo.cuentaSignos())
+print("El numero de espacios es de:",archivo.cuentaEspacios())
+print("El numero de palabras es de:",archivo.cuentaPalabras())
+print("El numero de lineas es de:",archivo.cuentaLineas())
+print("El numero de MAYUSCULAS es de:",archivo.cuentaMayusculas())
+print("El numero de minusculas es de:",archivo.cuentaMinusculas())
+print("Copiando el archivo:",archivo.CopiaArchivo())
+print("Convirtiendo a minusculas:",archivo.ConvierteMinusculas())
+print("Convirtiendo a MAYUSCULAS",archivo.ConvierteMayusculas())
+estado=archivo.Hexadecimal()
+estado.encode("hex")
+print("Convirtiendo a Hexadecimal",estado)
